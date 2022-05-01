@@ -86,7 +86,7 @@ class DivisionsController extends Controller
 
     public function getDivision($id)
     {
-        $division = Division::with('ambassador', 'superDivision', 'subDivisions')->find($id);
+        $division = Division::with('ambassador', 'superiorDivision', 'subDivisions')->find($id);
 
         return new DivisionResource($division);
     }
