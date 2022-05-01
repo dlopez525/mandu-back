@@ -19,17 +19,18 @@ class DatabaseSeeder extends Seeder
     {
         $this->faker = Factory::create();
 
-         \App\Models\Ambassador::factory(10)->create();
          \App\Models\SuperiorDivision::factory(20)->create()->each(function($f) {
-             $f->division()->save(
-                 \App\Models\Division::factory()->create()
-             );
+             \App\Models\Division::factory(5)->create()->each(function ($fq) use ($f) {
+                 $f->division()->save($fq);
+                 $fq->subDivisions()->saveMany(
+                     \App\Models\SubDivision::factory($this->faker->numberBetween(0, 5))->create()
+                 );
+             });
          });
-         \App\Models\Division::factory(55)->create()->each(function ($f) {
-             $f->subDivisions()->saveMany(
-                 \App\Models\SubDivision::factory($this->faker->numberBetween(0, 3))->create()
-             );
-         });
-        \App\Models\Division::factory(60)->create();
+        \App\Models\Division::factory(55)->create()->each(function ($fq) {
+            $fq->subDivisions()->saveMany(
+                \App\Models\SubDivision::factory($this->faker->numberBetween(0, 5))->create()
+            );
+        });
     }
 }
