@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Division;
+use App\Models\SubDivision;
+use App\Models\SuperiorDivision;
 use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,17 +22,17 @@ class DatabaseSeeder extends Seeder
     {
         $this->faker = Factory::create();
 
-         \App\Models\SuperiorDivision::factory(20)->create()->each(function($f) {
-             \App\Models\Division::factory(5)->create()->each(function ($fq) use ($f) {
-                 $f->division()->save($fq);
-                 $fq->subDivisions()->saveMany(
-                     \App\Models\SubDivision::factory($this->faker->numberBetween(0, 5))->create()
-                 );
-             });
+         SuperiorDivision::factory(50)->create()->each(function($f) {
+             $division = Division::factory()->create();
+             $f->division()->save($division);
+
+             $division->subDivisions()->saveMany(
+                 \App\Models\SubDivision::factory($this->faker->numberBetween(0, 5))->create()
+             );
          });
-        \App\Models\Division::factory(55)->create()->each(function ($fq) {
+        Division::factory(155)->create()->each(function ($fq) {
             $fq->subDivisions()->saveMany(
-                \App\Models\SubDivision::factory($this->faker->numberBetween(0, 5))->create()
+                SubDivision::factory($this->faker->numberBetween(0, 5))->create()
             );
         });
     }

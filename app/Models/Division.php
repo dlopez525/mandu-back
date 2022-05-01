@@ -16,7 +16,7 @@ class Division extends Model
         return $this->belongsTo(Ambassador::class);
     }
 
-    public function superDivision() {
+    public function superiorDivision() {
         return $this->belongsTo(SuperiorDivision::class);
     }
 

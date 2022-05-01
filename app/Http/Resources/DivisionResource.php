@@ -19,10 +19,11 @@ class DivisionResource extends JsonResource
             'name' => $this->name,
             'level' => $this->level,
             'number_collaborators' => $this->number_collaborators,
-            'super_division_id' => $this->super_division_id,
-            'superior_division' => $this->super_division_id != null ? $this->superDivision->name : '-',
+            'super_division_id' => $this->superior_division_id,
+            'superior_division' => $this->superior_division_id != null ? $this->superiorDivision->name : '-',
             'ambassador_id' => $this->ambassador_id,
             'ambassador' => $this->ambassador->name,
+            'sub_divisions_count' => $this->subDivisions->count(),
             'sub_divisions' => SubDivisionResource::collection($this->subDivisions)
         ];
     }

@@ -22,7 +22,7 @@ class DivisionFactory extends Factory
         return [
             'name' => $this->faker->company . " " . Str::random(5),
             'level' => $this->faker->numberBetween(1, 5),
-            'number_collaborators' => $this->faker->numberBetween(0, 100),
+            'number_collaborators' => $this->faker->numberBetween(1, 100),
             'ambassador_id' => $ambassador,
         ];
     }
