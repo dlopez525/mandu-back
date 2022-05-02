@@ -30,6 +30,8 @@ class DivisionRequest extends FormRequest
             'level' => 'required|integer|min:0',
             'number_collaborators' => 'required|integer|min:0',
             'ambassador_id' => 'required|integer|min:0|exists:ambassadors,id',
+            'superior_division_id' => 'nullable|exists:ambassadors,id',
+            'sub_divisions.*' => 'required|string',
         ];
     }
 
